@@ -5,7 +5,7 @@ import pymysql
 
 pantalla=Tk()
 pantalla.geometry("300x380")
-pantalla.title("bienvenidos")
+pantalla.title("FCI")
 pantalla.iconbitmap("fci.ico")
 
 pantalla.mainloop()
