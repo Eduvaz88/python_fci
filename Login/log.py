@@ -82,7 +82,31 @@ def registrar():
     contrasena_entry.pack()
     Label(pantalla2).pack()
 
-    Button(pantalla2, text="Registrar").pack()
+    Button(pantalla2, text="Registrar", command=inserta_datos).pack()
+
+
+def inserta_datos():
+    bd=pymysql.connect(
+        host="localhost",
+        user="root",
+        passwd="",
+        db="db_proyecto"
+        )
+
+    fcursor=bd.cursor()
+
+    sql="INSERT INTO login (usuario,contrasena) VALUES ('{O}',{1}')".format(nombreusuario_entry.get(),contrasena_entry.get())
+
+    try:
+            fcursor.execute(sql)
+            bd.commit()
+            messagebox.showinfo(message="Registro exitoso!", title="Aviso")
+
+    except:
+            bd.rollback()
+            messagebox.showinfo(message="No registrado", title="Aviso")
+
+    bd.close()
 
     
 menu_pantalla()
