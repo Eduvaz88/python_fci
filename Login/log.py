@@ -1,7 +1,7 @@
 import tkinter
 from tkinter import*
 from tkinter import messagebox
-import pymysql
+import PyMySQL
 
 def menu_pantalla():
     global pantalla
@@ -21,7 +21,7 @@ def menu_pantalla():
     Button(text="Iniciar Sesion", height="3", width="30", command=inicio_sesion).pack()
     Label(text="").pack()
 
-    Button(text="Registrar", height="3", width="30").pack()
+    Button(text="Registrar", height="3", width="30", command=registrar).pack()
 
     pantalla.mainloop()
 
@@ -56,4 +56,33 @@ def inicio_sesion():
 
     Button(pantalla1, text="Iniciar sesion").pack()
 
+def registrar():
+    global pantalla2
+    pantalla2 = Toplevel(pantalla)
+    pantalla2.geometry("400x250")
+    pantalla2.title("Registro")
+    pantalla2.iconbitmap("fci.ico")
+
+    global nombreusuario_entry
+    global contrasena_entry
+
+    nombreusuario_entry=StringVar()
+    contrasena_entry=StringVar()
+
+    Label(pantalla2, text="Ingrese usuario y contrasenia", bg="navy", fg="white", width="300", height="3", font=("Calibri", 15)).pack()
+    Label(pantalla2, text="").pack()
+
+    Label(pantalla2, text="Usuario").pack()
+    nombreusuario_entry = Entry(pantalla2)
+    nombreusuario_entry.pack()
+    Label(pantalla2).pack()
+
+    Label(pantalla2, text="Contrasena").pack()
+    contrasena_entry = Entry(pantalla2)
+    contrasena_entry.pack()
+    Label(pantalla2).pack()
+
+    Button(pantalla2, text="Registrar").pack()
+
+    
 menu_pantalla()
