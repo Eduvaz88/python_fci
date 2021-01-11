@@ -1,7 +1,9 @@
 import tkinter
 from tkinter import*
 from tkinter import messagebox
-import PyMySQL
+import pymysql
+import pymysql.cursors
+
 
 def menu_pantalla():
     global pantalla
@@ -95,7 +97,7 @@ def inserta_datos():
 
     fcursor=bd.cursor()
 
-    sql="INSERT INTO login (usuario,contrasena) VALUES ('{O}',{1}')".format(nombreusuario_entry.get(),contrasena_entry.get())
+    sql="INSERT INTO login (usuario,contrasena) VALUES ('{0}','{1}')".format(nombreusuario_entry.get(), contrasena_entry.get())
 
     try:
             fcursor.execute(sql)
