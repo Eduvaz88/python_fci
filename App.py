@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
@@ -23,7 +23,7 @@ def add_contact():
       cur.execute('INSERT INTO contacts (nombre, telefono, email) VALUES (%s, %s, %s)',
       (nombre, telefono, email))
       mysql.connection.commit()
-      return 'received'
+      return redirect(url_for('Index'))
 
 
 if __name__ == '__main__':
