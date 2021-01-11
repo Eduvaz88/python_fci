@@ -52,11 +52,11 @@ def inicio_sesion():
     Label(pantalla1).pack()
 
     Label(pantalla1, text="Contraseña").pack()
-    contraseniousuario_entry = Entry(pantalla1, textvariable=contraseniousuario_verify)
+    contraseniousuario_entry = Entry(pantalla1, show="*", textvariable=contraseniousuario_verify)
     contraseniousuario_entry.pack()
     Label(pantalla1).pack()
 
-    Button(pantalla1, text="Iniciar sesion").pack()
+    Button(pantalla1, text="Iniciar sesion", command=validacion_datos).pack()
 
 def registrar():
     global pantalla2
@@ -80,7 +80,7 @@ def registrar():
     Label(pantalla2).pack()
 
     Label(pantalla2, text="Contrasena").pack()
-    contrasena_entry = Entry(pantalla2)
+    contrasena_entry = Entry(pantalla2, show="*")
     contrasena_entry.pack()
     Label(pantalla2).pack()
 
@@ -110,5 +110,22 @@ def inserta_datos():
 
     bd.close()
 
-    
+def validacion_datos():
+    bd=pymysql.connect(
+        host="localhost",
+        user="root",
+        passwd="",
+        db="db_proyecto"
+        )
+
+    fcursor=bd.cursor()
+
+    fcursor.execute("SELECT contrasena FROM login WHERE usuario='"+nombreusuario_verify.get()+"' and contrasena='"+contraseniousuario_verify.get()+"'")
+
+    if fcursor.fetchall():
+        messagebox.showinfo(title="Los datos son:", message="Correctos")
+    else:
+         messagebox.showinfo(title="Los datos son:", message="Correctos")
+
+    bd.close()
 menu_pantalla()
