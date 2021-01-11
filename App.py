@@ -29,7 +29,7 @@ def ad_cliente():
       nompre = request.form['nombre']
       apellido = request.form['apellido']
       cur = mysql.connection.cursor()
-      cur.execute('INSERT INTO contacts (cedula, nombre, apellido) VALUES (%s, %s, %s)',
+      cur.execute('INSERT INTO cliente (cedula, nombre, apellido) VALUES (%s, %s, %s)',
       (cedula, nombre, apellido))
       mysql.connection.commit()
       return redirect(url_for('Index'))
