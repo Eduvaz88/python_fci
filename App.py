@@ -22,15 +22,15 @@ def Rating():
     return render_template('ad_rating.html')
 
 
-@app.route('/add_contact', methods=['POST'])
-def add_contact():
+@app.route('/ad_cliente', methods=['POST'])
+def ad_cliente():
   if request.method == 'POST':
-      nombre = request.form['nombre']
-      telefono = request.form['telefono']
-      email = request.form['email']
+      cedula = request.form['cedula']
+      nompre = request.form['nombre']
+      apellido = request.form['apellido']
       cur = mysql.connection.cursor()
-      cur.execute('INSERT INTO contacts (nombre, telefono, email) VALUES (%s, %s, %s)',
-      (nombre, telefono, email))
+      cur.execute('INSERT INTO contacts (cedula, nombre, apellido) VALUES (%s, %s, %s)',
+      (cedula, nombre, apellido))
       mysql.connection.commit()
       return redirect(url_for('Index'))
 
