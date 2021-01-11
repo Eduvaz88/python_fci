@@ -4,7 +4,7 @@ from flask_mysqldb import MySQL
 app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_PASSWORD'] = '1234'
 app.config['MYSQL_DB'] = 'proyecto_pa'
 mysql = MySQL(app)
 
@@ -26,7 +26,7 @@ def Rating():
 def ad_cliente():
   if request.method == 'POST':
       cedula = request.form['cedula']
-      nompre = request.form['nombre']
+      nombre = request.form['nombre']
       apellido = request.form['apellido']
       cur = mysql.connection.cursor()
       cur.execute('INSERT INTO cliente (cedula, nombre, apellido) VALUES (%s, %s, %s)',
