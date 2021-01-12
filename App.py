@@ -90,13 +90,8 @@ def update_cli(id):
     nombre = request.form['nombre']
     apellido = request.form['apellido']
     cur = mysql.connection.cursor()
-    cur.execute("""
-      UPDATE cliente
-      SET cedula = %s,
-          nombre = %s,
-          apellido = %s
-      WHERE id = %s
-    """, (cedula, nombre, apellido))
+    cur.execute('UPDATE cliente SET (cedula, nombre, apellido) VALUES (%s, %s, %s)',
+    (cedula, nombre, apellido))
     mysql.connection.commit()
     flash('datos editados')
     return redirect(url_for('Index'))
