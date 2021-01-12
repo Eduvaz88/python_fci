@@ -7,13 +7,12 @@ app = Flask(__name__)
 #conexion con la bd
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_PASSWORD'] = '1234'
 app.config['MYSQL_DB'] = 'proyecto_pa'
 mysql = MySQL(app)
 
 #configuraciones
 app.secret_key = 'mysecretkey'
-
 
 #rutas
 @app.route('/')
@@ -29,8 +28,10 @@ def Pelicula():
 
 @app.route('/ad_rating')
 def Rating():
-    return render_template('ad_rating.html')
-
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT id,nombre FROM pelicula')
+    ListaPelicula = cur.fetchall()
+    return render_template("rating.html", ListaPelicula=ListaPelicula)
 
 @app.route('/ad_cliente', methods=['POST'])
 def ad_cliente():
@@ -55,18 +56,6 @@ def ad_pelicula():
       (nombre, duracion))
       mysql.connection.commit()
       return redirect(url_for('Pelicula'))
-
-@app.route('/ad_rating', methods=['POST'])
-def ad_rating():
-  if request.method == 'POST':
-      idpelicula = request.form['idpelicula']
-      idcliente = request.form['idcliente']
-      rating = request.form['rating']
-      cur = mysql.connection.cursor()
-      cur.execute('INSERT INTO rating (idpelicula, idcliente, rating) VALUES (%s, %s, %s)',
-      (idpelicula, idcliente, rating))
-      mysql.connection.commit()
-      return redirect(url_for('Rating'))
 
 @app.route('/delete/<string:id>')
 def delete_cli(id):
