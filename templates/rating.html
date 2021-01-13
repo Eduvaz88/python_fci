@@ -1,3 +1,6 @@
+{% extends 'layout.html' %}
+
+{% block body %}
 <form method="POST" action="{{ url_for('ad_rating') }}">
 <p style="font-family:verdana">
 Elija su pelicula:<SELECT id="idpelicula" name="idpelicula" style="font-family:verdana">
@@ -15,3 +18,4 @@ Elija su calificacion:<SELECT id="calificaciones" name="calificaciones" style="f
 </SELECT>
 <input type='submit'>
 </p>
+{% endblock %}
