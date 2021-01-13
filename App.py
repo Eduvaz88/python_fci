@@ -57,6 +57,19 @@ def ad_pelicula():
       mysql.connection.commit()
       return redirect(url_for('Pelicula'))
 
+@app.route('/ad_rating', methods=['POST'])
+def ad_rating():
+  if request.method == 'POST':
+      userDetails = request.form
+      id = userDetails['id']
+      calificacion = userDetails['calificacion']
+      cur = mysql.connection.cursor()
+      cur.execute('INSERT INTO rating (idpelicula,rating) VALUES (%s, %s)',
+      (idpelicula, rating))
+      mysql.connection.commit()
+      flash("Agredado satisfactoriamente")
+      return render_template('rating.html')
+
 @app.route('/delete/<string:id>')
 def delete_cli(id):
   cur = mysql.connection.cursor()
@@ -79,8 +92,8 @@ def update_cli(id):
     nombre = request.form['nombre']
     apellido = request.form['apellido']
     cur = mysql.connection.cursor()
-    cur.execute('UPDATE cliente SET (cedula, nombre, apellido) VALUES (%s, %s, %s)',
-    (cedula, nombre, apellido))
+    cur.execute('UPDATE cliente SET cedula, nombre, apellido) where id = %s VALUES (%s, %s, %s)',
+    (id) (cedula, nombre, apellido))
     mysql.connection.commit()
     flash('datos editados')
     return redirect(url_for('Index'))

@@ -1,15 +1,17 @@
+<form method="POST" action="{{ url_for('ad_rating') }}">
 <p style="font-family:verdana">
-Elija su pelicula:<SELECT name="id" style="font-family:verdana">
+Elija su pelicula:<SELECT id="id" name="id" style="font-family:verdana">
 {% for n in ListaPelicula %}
   <OPTION value={{n[0]}}>{{n[1]}}</OPTION>
 {% endfor %}
 </SELECT>
 
-Elija su calificacion:<SELECT name="id" style="font-family:verdana">
+Elija su calificacion:<SELECT id="calificacion" name="calificacion" style="font-family:verdana">
   <OPTION value="value1">1</OPTION>
   <OPTION value="value2">2</OPTION>
   <OPTION value="value3">3</OPTION>
   <OPTION value="value4">4</OPTION>
   <OPTION value="value5">5</OPTION>
 </SELECT>
+<input type='submit' name='boton' />
 </p>
