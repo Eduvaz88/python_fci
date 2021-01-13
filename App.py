@@ -62,14 +62,14 @@ def ad_pelicula():
 def ad_rating():
   if request.method == 'POST':
       userDetails = request.form
-      id = userDetails['id']
-      calificacion = userDetails['calificacion']
+      idpelicula = userDetails['idpelicula']
+      calificaciones = userDetails['calificaciones']
       cur = mysql.connection.cursor()
-      cur.execute('INSERT INTO rating (id,calificacion) VALUES (%s, %s)',
-      (idpelicula, rating))
+      cur.execute('INSERT INTO rating (idpelicula,calificaciones) VALUES (%s, %s)',
+      (idpelicula, calificaciones))
       mysql.connection.commit()
       flash("Agredado satisfactoriamente")
-      return render_template('rating.html')
+      return redirect(url_for('Rating'))
 
 @app.route('/delete/<string:id>')
 def delete_cli(id):
