@@ -1,3 +1,7 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
 <form action="/update/{{cliente.0}}" method="POST">
 
   <input type="text" name="cedula" placeholder="Cedula" value="{{cliente.1}}">
@@ -8,3 +12,4 @@
   </button>
 
 </form>
+{% endblock %}
