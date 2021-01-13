@@ -64,7 +64,7 @@ def ad_rating():
       id = userDetails['id']
       calificacion = userDetails['calificacion']
       cur = mysql.connection.cursor()
-      cur.execute('INSERT INTO rating (idpelicula,rating) VALUES (%s, %s)',
+      cur.execute('INSERT INTO rating (id,calificacion) VALUES (%s, %s)',
       (idpelicula, rating))
       mysql.connection.commit()
       flash("Agredado satisfactoriamente")
