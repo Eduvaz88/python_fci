@@ -7,7 +7,7 @@ app = Flask(__name__)
 #conexion con la bd
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = '1234'
+app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'proyecto_pa'
 mysql = MySQL(app)
 
@@ -31,6 +31,7 @@ def Rating():
     cur = mysql.connection.cursor()
     cur.execute('SELECT id,nombre FROM pelicula')
     ListaPelicula = cur.fetchall()
+    mysql.connection.commit()
     return render_template("rating.html", ListaPelicula=ListaPelicula)
 
 @app.route('/ad_cliente', methods=['POST'])
@@ -92,8 +93,13 @@ def update_cli(id):
     nombre = request.form['nombre']
     apellido = request.form['apellido']
     cur = mysql.connection.cursor()
-    cur.execute('UPDATE cliente SET cedula, nombre, apellido) where id = %s VALUES (%s, %s, %s)',
-    (id) (cedula, nombre, apellido))
+    cur.execute("""
+        UPDATE cliente
+        SET cedula = %s,
+            nombre = %s,
+            apellido = %s
+        WHERE id = %s
+    """, (cedula, nombre, apellido, id))
     mysql.connection.commit()
     flash('datos editados')
     return redirect(url_for('Index'))
